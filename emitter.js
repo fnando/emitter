@@ -6,6 +6,30 @@
 //
 ;(function(emitter){
   "use strict";
+  
+  // Bind the callback to the specified context.
+  //
+  var bind = function(emitter, event, callback, context, once) {
+    var _callback = function() {
+      if (once) {
+        emitter.off(event, callback);
+      }
+
+      return callback.apply(context, arguments);
+    };
+
+    // Store the original callback, so we can remove it
+    // later with Emitter#off method.
+    _callback.callback = callback;
+
+    return _callback;
+  };
+  
+  // Convert arguments into array.
+  //
+  var toArray = function(args) {
+    return args.length === 1 ? [args[0]] : Array.apply(null, args);
+  };
 
   function _emitter() {
     // Hold all callbacks.
@@ -15,24 +39,6 @@
     // Initialize the Emitter object.
     //
     function Emitter() {}
-
-    // Bind the callback to the specified context.
-    //
-    var bind = function(emitter, event, callback, context, once) {
-      var _callback = function() {
-        if (once) {
-          emitter.off(event, callback);
-        }
-
-        return callback.apply(context, arguments);
-      };
-
-      // Store the original callback, so we can remove it
-      // later with Emitter#off method.
-      _callback.callback = callback;
-
-      return _callback;
-    };
 
     // Attach a new event handler.
     //
@@ -114,7 +120,7 @@
     //     emitter.emit("ready", arg1, arg2, argN);
     //
     Emitter.prototype.emit = function() {
-      var args = Array.prototype.slice.apply(arguments)
+      var args = toArray(arguments)
         , event = args.shift()
         , listeners = this.listeners(event)
         , callback
