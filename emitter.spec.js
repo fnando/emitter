@@ -1,10 +1,10 @@
-var async = require("../../async.js");
+var Emitter = require("./emitter");
 
-describe("async.emitter", function() {
+describe("Emitter", function() {
   var emitter, callback;
 
   beforeEach(function() {
-    emitter = async.emitter();
+    emitter = Emitter.create();
     callback = jasmine.createSpy();
   });
 
