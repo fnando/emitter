@@ -107,4 +107,13 @@ describe("Emitter", function() {
     expect(typeof target._emitter).toEqual("undefined");
     expect(typeof target.emitter).toEqual("object");
   });
+
+  it("proxies calls when extending object", function() {
+    var target = {};
+    Emitter.extend(target);
+    target.on("event", callback);
+    target.emit("event", 1);
+
+    expect(callback).wasCalledWith(1);
+  });
 });
