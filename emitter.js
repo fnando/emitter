@@ -6,7 +6,7 @@
 //
 ;(function(emitter){
   "use strict";
-  
+
   // Bind the callback to the specified context.
   //
   var bind = function(emitter, event, callback, context, once) {
@@ -24,7 +24,7 @@
 
     return _callback;
   };
-  
+
   // Convert arguments into array.
   //
   var toArray = function(args) {
@@ -137,4 +137,15 @@
 
   // Expose only the Emitter instance builder.
   emitter.create = _emitter;
+
+  // Mix public interface into target object. This will bind functions to it.
+  emitter.extend = function(target, attribute) {
+    var emitter = this.create();
+    target[attribute || "_emitter"] = emitter;
+
+    target.on = emitter.on.bind(emitter);
+    target.off = emitter.off.bind(emitter);
+    target.once = emitter.once.bind(emitter);
+    target.emit = emitter.emit.bind(emitter);
+  };
 })(typeof(exports) === "undefined" ? this.Emitter = {} : exports);

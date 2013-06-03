@@ -88,4 +88,23 @@ describe("Emitter", function() {
 
     expect(emitter.listeners("test").length).toEqual(1);
   });
+
+  it("extends object", function() {
+    var target = {};
+    Emitter.extend(target);
+
+    expect(typeof target.on).toEqual("function");
+    expect(typeof target.off).toEqual("function");
+    expect(typeof target.once).toEqual("function");
+    expect(typeof target.emit).toEqual("function");
+    expect(typeof target._emitter).toEqual("object");
+  });
+
+  it("extends object with custom attribute name", function() {
+    var target = {};
+    Emitter.extend(target, "emitter");
+
+    expect(typeof target._emitter).toEqual("undefined");
+    expect(typeof target.emitter).toEqual("object");
+  });
 });
