@@ -106,8 +106,8 @@
 
     // Attach a new event handler that will be executed only once.
     //
-    //     emitter.once(callback);
-    //     emitter.once(callback, this);
+    //     emitter.once("ready", callback);
+    //     emitter.once("ready", callback, this);
     //
     Emitter.prototype.once = function(event, callback, context) {
       this.on(event, callback, context, true);

@@ -8,7 +8,7 @@ Create new emitter
   var emitter = Emitter.create();
 ```
 
-### emitter.emit 
+### emitter.emit
 
 Trigger the specified event. Any additional parameters
 will be passed to the callback.
@@ -17,7 +17,7 @@ will be passed to the callback.
   emitter.emit("ready");
   emitter.emit("ready", arg1, arg2, argN);
 ```
-    
+
 ### emitter.on
 
 Attach a new event handler.
@@ -25,11 +25,11 @@ Attach a new event handler.
 ``` javascript
   emitter.on("ready", callback);
   emitter.on("ready", callback, this);
-``` 
-    
+```
+
 ### emitter.off
 
-Detach a specific event handler.  If no `callback` is 
+Detach a specific event handler.  If no `callback` is
 provided, then all event handlers will be removed.
 
 ``` javascript
@@ -39,8 +39,8 @@ provided, then all event handlers will be removed.
 
 ### emitter.listeners
 
-Return a copy of all listeners for a given `event` name. 
-If `event` doesn't exist, then an empty array will be 
+Return a copy of all listeners for a given `event` name.
+If `event` doesn't exist, then an empty array will be
 returned instead.
 
 ``` javascript
@@ -53,11 +53,21 @@ Attach a new event handler that will be executed only once.
 
 
 ``` javascript
-  emitter.once(callback);
-  emitter.once(callback, this);
+  emitter.once("ready", callback);
+  emitter.once("ready", callback, this);
 ```
 
-    
+### Emitter.extend
+
+You can extend objects.
+
+```javascript
+  var object = {};
+  Emitter.extend(object);
+  object.on("ready", callback);
+  object.emit("ready");
+```
+
 ## Running tests
 
 Install `jasmine-node` with `npm install jasmine-node -g` and
