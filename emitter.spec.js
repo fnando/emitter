@@ -97,6 +97,7 @@ describe("Emitter", function() {
     expect(typeof target.off).toEqual("function");
     expect(typeof target.once).toEqual("function");
     expect(typeof target.emit).toEqual("function");
+    expect(typeof target.listeners).toEqual("function");
     expect(typeof target._emitter).toEqual("object");
   });
 
