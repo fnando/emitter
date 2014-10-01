@@ -117,4 +117,9 @@ describe("Emitter", function() {
 
     expect(callback).wasCalledWith(1);
   });
+
+  it("returns extended object", function(){
+    var target = {};
+    expect(Emitter.extend(target)).toEqual(target);
+  });
 });

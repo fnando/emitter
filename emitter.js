@@ -148,5 +148,7 @@
     target.once = emitter.once.bind(emitter);
     target.emit = emitter.emit.bind(emitter);
     target.listeners = emitter.listeners.bind(emitter);
+
+    return target;
   };
 })(typeof(exports) === "undefined" ? this.Emitter = {} : exports);
